@@ -1,0 +1,12 @@
+name: obesity_shiny
+title: obesity_shiny
+username:
+account: rachelphan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2186898
+bundleId: 3072370
+url: https://rachelphan.shinyapps.io/obesity_shiny/
+when: 1588002402.32267
+asMultiple: FALSE
+asStatic: FALSE

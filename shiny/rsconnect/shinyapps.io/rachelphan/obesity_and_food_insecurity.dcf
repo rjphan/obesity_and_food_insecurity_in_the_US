@@ -1,0 +1,12 @@
+name: obesity_and_food_insecurity
+title: obesity_and_food_insecurity
+username:
+account: rachelphan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2186892
+bundleId: 3065347
+url: https://rachelphan.shinyapps.io/obesity_and_food_insecurity/
+when: 1587865593.69344
+asMultiple: FALSE
+asStatic: FALSE
