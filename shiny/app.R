@@ -54,6 +54,9 @@ ui <- navbarPage(
             
             fluidRow(column(2), column(8,
                                        
+                     # I used h to create a heading and p to create a new paragraph. tag$b makes the text bold, and br() means
+                     # a break.
+                                       
                      h1(tags$b("Obesity and Food Insecurity in the United States"), align = "center", style = "color: darkred"),
                      
                      p(tags$b("Insights on America's Alarming Obesity Rates and an Analysis on Food Insecurity"), align = "center"),
@@ -67,6 +70,8 @@ ui <- navbarPage(
                   variation in the percentage of population that is obese across different state."),
                      
                      br(),
+                     
+                     # By using style, I can change colors of the text.
                      
                      h3("Obesity", style = "color: darkred"),
                      
@@ -235,6 +240,9 @@ ui <- navbarPage(
                     )
                 ),
                 
+                      # I wanted another graph below the previous one, so I created another sidebarPanel layout below the one 
+                      # on top.
+                
                        sidebarPanel(
                            
                            h3("Poverty in the US as a Whole", style = "color: indigo"),
@@ -260,7 +268,8 @@ ui <- navbarPage(
                 tabPanel("Food Access",
                      
                     # I used tabsetPanel again to create tabs within the US tab. fluidRow allows me to create a nice layout 
-                    # for my page.
+                    # for my page. The column function sets the text into the different grid layouts of fluidRow to help 
+                    # me organize my text.
                              
                     tabsetPanel(
                         tabPanel("The United States",
@@ -305,7 +314,8 @@ ui <- navbarPage(
                                                   
                                                   br(),
                                                   
-                                                  p("description"),
+                                                  p("I also wanted to look at food insecurity specifically across different states. 
+                                                    Food insecurity seems the most prominent in the Southern region."),
                                                   
                                      ),
                                      
@@ -322,7 +332,8 @@ ui <- navbarPage(
                                  br(),
                                  
                         # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted. 
-                        # Then I used selectInput to allow the user to choose if they want to see urban or rural on the graph.
+                        # Then I used selectInput to allow the user to choose if they want to see urban or rural on the graph,
+                        # which corresponds with the server code later on. 
                             
                              sidebarLayout(
                                  sidebarPanel(column(3),
@@ -363,6 +374,9 @@ ui <- navbarPage(
                     
 ),
     
+# I created my last tab panel (aside from the About page) using tabPanel and named it Findings. I want tabs within this 
+# tab, so I used tabsetPanel to create the tabs "Corrleation," "Variables," and "Model."
+
     tabPanel("Findings",
              tabsetPanel(
                  tabPanel("Correlation",
@@ -442,6 +456,9 @@ ui <- navbarPage(
                         br(),
                         br(),
                         
+                        # Using fluidPage gives the page a new layout. Using sidebarLayout allows me to create a \
+                        # sidebarPanel and a mainPanel, which is the graph I wanted. 
+                        
                         fluidPage(
                             sidebarLayout(
                                 sidebarPanel(
@@ -496,7 +513,9 @@ ui <- navbarPage(
                                     For example, for genderFemale, we are 95% confident that the true average percentage of obesity in a population 
                                     lies within the range of 28.1 and 28.3%.")),
                                   
-                                
+                            # My gt regression tables are saved as html files, so I needed to use includeHTML to read in the 
+                            # file into Shiny.
+                            
                             mainPanel(
                                   column(7, offset = 2,
                                          
@@ -530,6 +549,11 @@ ui <- navbarPage(
                  )
              
              )),
+
+    
+    # To create a drop down menu in the navigation bar, I used navbarMenu. Then I used tabPanel to label the menu options, with 
+    # the options being "The Data" and the page about me. To include hyperlinks in the text, I used certain formating like a() and 
+    # the function href -.
     
     navbarMenu("About",
                tabPanel("The Data",
@@ -576,6 +600,8 @@ ui <- navbarPage(
                         
                ),
                
+               # Using tags$em allowed me to make the text italicized. 
+               
                tabPanel("Me :)",
                         
                         column(10,
@@ -607,7 +633,9 @@ ui <- navbarPage(
 
 server <- function(input, output) {
     
-    # Load in image for top of app for Findings page
+    # Load in image for top of app for Introductio page. I decide the height and width of the image, and set deleteFile = FALSE
+    # so my image wouldn't get deleted from my files once the app runs. I set it equal to TRUE by mistake once and it was 
+    # a hassle. renderImage allows you to render image files.
     
     output$obesity_image <- renderImage({
         list(src = './images/obesity.image.jpg', 
@@ -623,6 +651,10 @@ server <- function(input, output) {
              width = 650,
              style = "display: block; margin-left: auto; margin-right: auto;")}, 
         deleteFile = FALSE)
+    
+    # Now I needed to render some plots. I did this using renderPlot. It is basically the same code as in an RMD file. The
+    # only thing I had to do was set the data argument for ggplot instead of piping data like usual. The name after output$ is
+    # what you should call in the ui portion of Shiny to get the same grah or image.
     
     output$obesity_region <- renderPlot({
         obesity_region <- obesity_region %>% 
@@ -640,6 +672,11 @@ server <- function(input, output) {
             theme(panel.grid.major.y = element_blank(),
                   panel.grid.minor = element_blank())
     })
+    
+    # Next I needed to output a bunch of different plots and images, so I used renderImage 
+    # and also renderPlot. Set filter(urban == input$urban) allows the user from the ui portion
+    # of Shiny to choose the factor level to filter my data by, which is why input$urban works.
+    # I then graphed the data and set a best fit line.
     
     output$obesity_region_facet <- renderImage({
         list(src = './plots/obesity_region_plot.png', 
@@ -664,6 +701,9 @@ server <- function(input, output) {
             geom_smooth(method = "lm", color = "blue")
     })
     
+    # I used renderPlot and renderImage to render a couple graphs. I plotted poverty on a US map, and then low income and low
+    # food access on the US map.
+    
     output$poverty_plot <- renderPlot({
         plot_usmap(data = food_poverty_mean, values = "mean_poverty", 
                    color = "white", labels = FALSE) +
@@ -681,6 +721,8 @@ server <- function(input, output) {
              width = 650,
              style = "display: block; margin-left: auto; margin-right: auto;")
     }, deleteFile = FALSE)
+    
+    # I then made the bar plot for the low income and low food access variable. 
     
     output$lia_states <- renderPlot({
         food_lia <- food_lia %>% 
@@ -707,6 +749,9 @@ server <- function(input, output) {
     width = 940,
     height = 750)
     
+    # I created a graph where you can choose the amount of ruralness using input$urban. I used geom_jitter
+    # because some points overlapped with each other.
+    
     output$poverty_lia_plot <- renderPlot({
         bootstrap_joined <- bootstrap_joined %>% 
             filter(urban == input$urban)
@@ -723,6 +768,8 @@ server <- function(input, output) {
             geom_smooth(method = "lm", color = "green")
     })
     
+    # I created a correlation plot between variables using ggcorrplot.
+    
     output$corr <- renderPlot({
         ggcorrplot(joined_cor, 
                    type = "upper", 
@@ -737,6 +784,13 @@ server <- function(input, output) {
     },
     width = 500,
     height = 500)
+    
+    # I want to create a plot where you can choose the yvariable and demographic (xvariable) to look, so I used both
+    # input$demographic and input$yvariable. However, when I use the inputs, the graph doesn't factor the categorical
+    # variables, even though I specifically mutated the variables to be factors. It works when there is no input, 
+    # and the x and y are just a single variable. I still need to work on this part. Using ifelse  and paste allows me 
+    # to print labels that are based on the user input. I commented out the code that I want to use eventually, but will 
+    # use the following for now.
     
     output$demographic <- renderPlot({
         bootstrap_joined <- bootstrap_joined %>%
@@ -800,6 +854,8 @@ server <- function(input, output) {
         
     })
     
+    # This plot output are just test plots for when I want to format something and don't want to render such a large plot.
+    
     output$test <- renderPlot({
             ggplot(data = bootstrap_joined, aes(x = input$demographic, y = mean_perc_obese, color = input$demographic)) +
             geom_jitter() +
@@ -814,18 +870,14 @@ server <- function(input, output) {
                  y = "Mean Obesity Rate")
     })
     
-    output$lia_gt <- renderImage({
-        list(src = './plots/lia_gt.html', 
-             height = 600,
-             width = 650,
-             style = "display: block; margin-left: auto; margin-right: auto;")}, 
-        deleteFile = FALSE)
-}
+    # I tried rendering html images, but that didn't work. It turns out you need to use includeHTML in the user code.
+    
+    #
 
 # Run the application 
 shinyApp(ui = ui, server = server)
 
-# Ask about ask about factor graph (yvariable, demographic, filter out NAs), ask about regression, ask 
-# about gt HTML, why poverty for urban/rural in food access takes forever to load the graph
+# Ask about ask about factor graph (yvariable, demographic, filter out NAs), ask about regression, why poverty for urban/rural in 
+#food access takes forever to load the graph
 
 
