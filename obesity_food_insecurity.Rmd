@@ -698,44 +698,5 @@ ggsave("obesity_shiny/plots/poverty_lia_chart.png", plot = last_plot())
 ```
 
 
-An Introduction
-
-- Introduce the issue
-- Describe what obesity is 
-- Describe what food insecurity is
-
-Variables in question
-
-Obesity
-Obesity over time map
-Choose region to look at map
-The poverty map
-Should make a graph showing how poverty relates to obesity
-
-Food Access
-Food lia
-Could allow people to choose between which regions they want to compare
-Food lia us map
-Allow people to choose between lia and la
-
-Findings
-Correlation plot
-Make best fit line graphs for each variable that affects obesity and allow people to choose which one they want to look at
-Make a regression plot
-  Otherwise, gt tables?
-  
-Data
-Give process of creation of the data 
-Give sources 
-
-Me
-Self introdcution
-Provide links to github and linkedin 
-
-
-
-
-
-
 
 
