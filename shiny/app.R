@@ -869,15 +869,17 @@ server <- function(input, output) {
                  x = "Mean Poverty Rate",
                  y = "Mean Obesity Rate")
     })
-    
-    # I tried rendering html images, but that didn't work. It turns out you need to use includeHTML in the user code.
-    
-    #
 
 # Run the application 
 shinyApp(ui = ui, server = server)
 
+
+# Questions
 # Ask about ask about factor graph (yvariable, demographic, filter out NAs), ask about regression, why poverty for urban/rural in 
-#food access takes forever to load the graph
+# food access takes forever to load the graph. 
+
+# To Do
+# Could make predictor graphic based on your demographic like Steph's project. Could add little icons in the 
+# navbar tab using icon.
 
 
