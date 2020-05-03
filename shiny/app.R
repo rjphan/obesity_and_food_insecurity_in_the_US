@@ -318,7 +318,7 @@ ui <- navbarPage(
                              fluidRow(
                                 imageOutput("lia_usmap")
                         )
-                        ),
+                        )),
                         
                         tabPanel("States",
                                  
@@ -345,7 +345,6 @@ ui <- navbarPage(
                                          plotOutput("lia_states")
                                      )
                                  )     
-                                 
                                  ),
                         
                         tabPanel("Poverty",
@@ -400,7 +399,7 @@ ui <- navbarPage(
                         
                         )
                     
-)),
+),
     
 # I created my last tab panel (aside from the About page) using tabPanel and
 # named it Findings. I want tabs within this tab, so I used tabsetPanel to
@@ -657,13 +656,27 @@ ui <- navbarPage(
                         
                         br(),
                         
-                        h2("Resources and Ways to Help", style = "color: darkred"))
+                        h2("Resources and Ways to Help", style = "color: darkred"),
                         
-               ),
+                        br(),
+                        
+                        p("To look for more information on food insecurity, please visit", a("Feeding America", 
+                        href = "https://www.feedingamerica.org/"), " and the", a("USDA",
+                        href = "https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/key-statistics-graphics.aspx"),
+                        ". Please also consider donating to local food banks. You can find the one nearest you using Feeding America's", 
+                        a("Food Pantry Finder", href = "https://www.feedingamerica.org/find-your-local-foodbank"), ". 
+                        Both non-perishable foods, personal care items, and monetary donations are generally accepted."),
+                        
+                        p("To look for more information on obesity, please visit the", a("Center for Disease Control and Prevention", 
+                        href = "https://www.cdc.gov/obesity/index.html"), " or the", a("World Health Organization", href =
+                        "https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight"), ". The CDC also has tips on how to",
+                        a("minimize the risk of obesity", href = "https://www.cdc.gov/obesity/strategies/index.html"), ".")
+                        
+               )),
                
                # Using tags$em allowed me to make the text italicized.
                
-               tabPanel("Me :)",
+               tabPanel("The Author",
                         
                         column(10,
                         
@@ -918,7 +931,28 @@ server <- function(input, output) {
     # To better visualize the regression than just through gt tables, 
     # I made a plot to show the predictions. Since each estimate is 
     # an offset from the baseline variable, I added the baseline 
-    # estimate to each of the other levels in the variable. 
+    # estimate to each of the other levels in the variable. However
+    # I could only make visualizations for the categorical data,
+    # since I only had one point for the numerical data. I had 
+    # tried mapping the linear model onto the whole dataset, 
+    # but because of the nature of the data, it yielded an error
+    # that my data was a double but it could only take a single.
+    # Thus, I decided not to pursue visualizations for the 
+    # numerical variables.
+    
+    # I created a visualization for age by first using tidy. Then,
+    # I wanted to add the baseline estimate, so I made that an object 
+    # to add later. I mutated a new column called Estimate that added
+    # on the baseline estimate to the other levels of the variable.
+    # I also wanted to rename some specific observations, like the
+    # (Intercept) term, which wouldn't make sense to viewers,
+    # and I did so using an arrow and calling the specific cell the
+    # observation was in. Then I used str_sub to get rid of the 
+    # prefixes in each variable. str_sub tells R which character position 
+    # to start the name in. For example, for age, the position I want
+    # the names to start in is 4, so  that gets rid of the "age" prefix,
+    # which has 3 characters and thus occupies positions 1-3. Then I
+    # used ggplot to make a scatterplot.
     
     output$lm_age <- renderPlot({
             lm_age <- lm(mean_perc_obese ~ age, data = bootstrap_joined) %>% 
@@ -952,6 +986,20 @@ server <- function(input, output) {
                  y = "Mean Obesity Rate")
     })
     
+    # I created a visualization for gender by first using tidy. Then,
+    # I wanted to add the baseline estimate, so I made that an object 
+    # to add later. I mutated a new column called Estimate that added
+    # on the baseline estimate to the other levels of the variable.
+    # I also wanted to rename some specific observations, like the
+    # (Intercept) term, which wouldn't make sense to viewers,
+    # and I did so using an arrow and calling the specific cell the
+    # observation was in. Then I used str_sub to get rid of the 
+    # prefixes in each variable. str_sub tells R which character position 
+    # to start the name in. For example, for gender, the position I want
+    # the names to start in is 7, so  that gets rid of the "gender" prefix,
+    # which has 6 characters and thus occupies positions 1-6. Then I
+    # used ggplot to make a scatterplot.
+    
     output$lm_gender <- renderPlot({
         lm_gender <- lm(mean_perc_obese ~ gender, data = bootstrap_joined) %>% 
             tidy()
@@ -983,6 +1031,20 @@ server <- function(input, output) {
                  x = "Gender",
                  y = "Mean Obesity Rate")
     })
+    
+    # I created a visualization for race by first using tidy. Then,
+    # I wanted to add the baseline estimate, so I made that an object 
+    # to add later. I mutated a new column called Estimate that added
+    # on the baseline estimate to the other levels of the variable.
+    # I also wanted to rename some specific observations, like the
+    # (Intercept) term, which wouldn't make sense to viewers,
+    # and I did so using an arrow and calling the specific cell the
+    # observation was in. Then I used str_sub to get rid of the 
+    # prefixes in each variable. str_sub tells R which character position 
+    # to start the name in. For example, for race, the position I want
+    # the names to start in is 5, so  that gets rid of the "race" prefix,
+    # which has 4 characters and thus occupies positions 1-4. Then I
+    # used ggplot to make a scatterplot.
     
     output$lm_race <- renderPlot({
         lm_race <- lm(mean_perc_obese ~ race, data = bootstrap_joined) %>% 
@@ -1016,6 +1078,20 @@ server <- function(input, output) {
                  y = "Mean Obesity Rate")
     })
     
+    # I created a visualization for region by first using tidy. Then,
+    # I wanted to add the baseline estimate, so I made that an object 
+    # to add later. I mutated a new column called Estimate that added
+    # on the baseline estimate to the other levels of the variable.
+    # I also wanted to rename some specific observations, like the
+    # (Intercept) term, which wouldn't make sense to viewers,
+    # and I did so using an arrow and calling the specific cell the
+    # observation was in. Then I used str_sub to get rid of the 
+    # prefixes in each variable. str_sub tells R which character position 
+    # to start the name in. For example, for region, the position I want
+    # the names to start in is 7, so  that gets rid of the "region" prefix,
+    # which has 6 characters and thus occupies positions 1-6. Then I
+    # used ggplot to make a scatterplot.
+    
     output$lm_region <- renderPlot({
         lm_region <- lm(mean_perc_obese ~ region, data = bootstrap_joined) %>% 
             tidy()
@@ -1047,6 +1123,20 @@ server <- function(input, output) {
                  x = "Region",
                  y = "Mean Obesity Rate")
     })
+    
+    # I created a visualization for urban by first using tidy. Then,
+    # I wanted to add the baseline estimate, so I made that an object 
+    # to add later. I mutated a new column called Estimate that added
+    # on the baseline estimate to the other levels of the variable.
+    # I also wanted to rename some specific observations, like the
+    # (Intercept) term, which wouldn't make sense to viewers,
+    # and I did so using an arrow and calling the specific cell the
+    # observation was in. Then I used str_sub to get rid of the 
+    # prefixes in each variable. str_sub tells R which character position 
+    # to start the name in. For example, for urban, the position I want
+    # the names to start in is 6, so  that gets rid of the "urban" prefix,
+    # which has 5 characters and thus occupies positions 1-5. Then I
+    # used ggplot to make a scatterplot.
     
     output$lm_ruralness <- renderPlot({
         lm_urban <- lm(mean_perc_obese ~ urban, data = bootstrap_joined) %>% 
