@@ -24,6 +24,7 @@ library(tidyverse)
 library(ggcorrplot)
 library(gt)
 library(webshot)
+library(reprex)
 ```
 
 
@@ -40,30 +41,6 @@ obesity_x <- read_csv("raw_data/Nutrition__Physical_Activity__and_Obesity_-_Beha
 # States Department of Agriculture)
 
 food_access_x <- read_excel("raw_data/Food Accessibility.xlsx", sheet = 3)
-
-# Read in rural income data from
-# https://www.ers.usda.gov/data-products/atlas-of-rural-and-small-town-america/
-# (United States Department of Agriculture). Might not use it.
-
-rural_income <- read_csv("raw_data/Rural Atlas Data/Income.csv")
-
-# Read in income data for all US Counties from
-# https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/
-# (US Bureau of Labour Statistics). Might not use it.
-
-income <- read_excel("raw_data/Unemployment.xls", skip = 4)
-
-# Read in consumer Price Index ata from
-# https://www.ers.usda.gov/data-products/food-price-outlook/ (United States
-# Department of Agriculture). Might not use it.
-
-cpi <- read_excel("raw_data/historicalcpi.xlsx", skip = 1)
-
-# Notes for myself: If obesity is affected by food access, then can look deeper
-# into food access. How does ruralness affect food access? How do consumer food
-# price indexes affect food accessibility? How does SNAP policy affect food
-# access (can look at SNAP data from USDA:
-# https://www.ers.usda.gov/data-products/snap-policy-data-sets/).
 
 ```
 

@@ -29,8 +29,10 @@ food_lia <- readRDS("data/food_lia.RDS")
 
 # ui code
 
-# I want a navigation bar at the top, so I created a navbarPage. Then I wanted 4 different tab panels in the navigation bar, 
-# meaning An Introduction, Variables, Findings, and About. I also included the title of my project in the navbarPage.
+# I want a navigation bar at the top, so I created a navbarPage. Then I wanted 4
+# different tab panels in the navigation bar, meaning An Introduction,
+# Variables, Findings, and About. I also included the title of my project in the
+# navbarPage.
 
 ui <- navbarPage(
     
@@ -44,9 +46,11 @@ ui <- navbarPage(
             br(),
             br(),
 
-            # Outputted the title image that I wanted for the application. Then I used fluidRow to create a nice layout for the 
-            # introduction page and used columns to choose where I wanted the text to go. In then put in the text that I wanted
-            # to tell the audience. I changed the colors and size of the text using style.
+            # Outputted the title image that I wanted for the application. Then
+            # I used fluidRow to create a nice layout for the introduction page
+            # and used columns to choose where I wanted the text to go. In then
+            # put in the text that I wanted to tell the audience. I changed the
+            # colors and size of the text using style.
             
             imageOutput("obesity_image", width = "100%", height = "100%"),
             
@@ -54,8 +58,9 @@ ui <- navbarPage(
             
             fluidRow(column(2), column(8,
                                        
-                     # I used h to create a heading and p to create a new paragraph. tag$b makes the text bold, and br() means
-                     # a break.
+                     # I used h to create a heading and p to create a new
+                     # paragraph. tag$b makes the text bold, and br() means a
+                     # break.
                                        
                      h1(tags$b("Obesity and Food Insecurity in the United States"), align = "center", style = "color: darkred"),
                      
@@ -63,11 +68,12 @@ ui <- navbarPage(
                      
                      br(),
                      
-                     p("Although one of the wealthiest countries in the world, The United States has one of the highest obesity rates
-                  of any developed country. In 2016, according to the Central Intelligence Agency, the US saw 36.20% of its 
-                  adult population classified as obese. Granted, the US is an incredibly large and diverse country. People's diets and
-                  amount of physical movement vary region to region, state to state. Thus, It is important to look at the
-                  variation in the percentage of population that is obese across different state."),
+                     p("Although one of the wealthiest countries in the world, the United States has one of the highest obesity rates
+                  of any developed country. In 2016, according to the", a("Central Intelligence Agency", href = 
+                  "https://www.cia.gov/library/publications/the-world-factbook/rankorder/2228rank.html"), ", the US saw 36.20% of its 
+                  adult population classified as obese, ranking #12 worldwide. Granted, the US is an incredibly large and diverse country. 
+                  Diets and quantity of physical activity vary region to region, state to state. Thus, it is important to look at the
+                  variation in the percentage of population that is obese across different states and different regions."),
                      
                      br(),
                      
@@ -75,50 +81,54 @@ ui <- navbarPage(
                      
                      h3("Obesity", style = "color: darkred"),
                      
-                     p("Obesity is defined as excessive or abnormal fat accumulation that may impair health, according to the World
-                  Health Organization. Body Mass Index is one way to determine obesity status; it is calculated by dividng a person's 
-                  weight in kilograms by the square of their height in meters. A BMI equal to or greater than 30 is classified as obese."),
+                     p("Obesity is defined as excessive or abnormal fat accumulation that may impair health, according to the", a("World
+                  Health Organization", href = "https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight"), ". Body Mass Index is one way to determine obesity status; it is calculated by dividng a person's 
+                  weight in kilograms by the square of their height in meters. A BMI equal to or greater than 30 is considered obese."),
                      
                      br(),
                      
-                     p("Because obesity can make its population more susceptible to severe illnesses, I wanted to explore different 
+                     p("Because those who are obese are more susceptible to severe illnesses, I wanted to explore different 
                        factors that could affect the percentage of obesity in a population. Some of these variables include, of
                        course, age, gender, and the region in which you live. However, I was also inspired by the unfortunate situation
-                       that COVID19 has presented us with: food shortages. I wondered if having easy way access to healthy and reliable
+                       that COVID19 has presented us with: food shortages. I wondered if having easy access to healthy and reliable
                        food supplies had any correlation with obesity in the US. After all, if you cannot easily reach healthy food options, it 
-                       is possible that you would resort to cheap fast food or unhealthy diets. I was also curious to see if food security was different
+                       is possible that you would resort to cheap fast food or unhealthy diets. I was also curious to see if food insecurity was different
                        across different states and regions of the country, and how much it could be impacting obesity."),
                      
                      br(),
                      
                      h3("Food Insecurity", style = "color: darkred"),
                      
-                     p("Currently, about 1 in 9 people in the US are suffering from food insecurity. According to Feeding America, food insecurity 
-                        is a household's inability to provide enough food for every person to live an active, healthy life. It is a method of measuring 
-                        hunger in America, but there are often serious health consequences that come with food insecurity, especially for children and for seniors, 
-                        who are often stuck between choosing to feed themselves and paying for medical care. Food insecurity can be caused by economic reasons, 
-                        such as a lack of money to buy groceries. However, there are infrastructural causes as well, like living in a food 
-                        desert, where there is either a lack in supplies of or difficulty in reaching fresh and healthy foods. This version of
-                        food insecurity will be one of the main variables in this analysis. Because poverty seems to be associated with food
-                        insecurity, I looked at this variable as well."),
+                     p("Currently, about 1 in 9 people in the US are suffering from food insecurity. According to", a("Feeding America", href =
+                     "https://www.feedingamerica.org/hunger-in-america/food-insecurity"), ", food insecurity is a household's inability to provide 
+                     enough food for every person to live an active, healthy life. It is a method of measuring hunger in America, but 
+                     there are often serious health consequences that come with food insecurity, especially for children and for seniors, 
+                     who are often stuck between choosing to feed themselves and paying for medical care. Food insecurity can be caused by economic reasons, 
+                     such as a lack of money to buy groceries. However, there are infrastructural causes as well, like living in a food 
+                     desert, where there is either a lack in supplies of or difficulty in reaching fresh and healthy foods. This second definition of
+                     food insecurity was one of the main variables in this analysis. Because poverty seems to be associated with food
+                     insecurity, I looked at this variable as well."),
                      
                      br(),
                      
                      h3("Analysis", style = "color: darkred"),
                      
                      p("There are two main variables that I examined, as aforementioned: obesity and food access. Under the Variables 
-                       in Question tab, you will find my analysis on both. The obesity tab explores obesity across the US over time. It also looks at 
+                       in Question tab, you will find my analysis on both. The Obesity tab explores obesity across the US over time. It also looks at 
                        how obesity differs across regions in the country. Within this tab, you can find a comparison between obesity and poverty as well.
-                       The food access tab looks at food access across different states in the US."),
+                       The Food Access tab looks at food access across different states in the US. Lastly, the Findings tab looks at the correlations
+                       between variables and regression models for predicting mean percentage of obesity in a population."),
                      
                      br(),
                      br(),
                      br()
 )))),
     
-# I also want there to be a drop down menu for my variables in the navigation bar, and I can do that using navbarMenu. Within
-# the obesity variable section, I added different tabs, like "The US," "Poverty," and "Regions" using tabsetPanel. fluidRow created
-# a nice layout for the page. I used imageOutput again to display my obesity in the US map.
+# I also want there to be a drop down menu for my variables in the navigation
+# bar, and I can do that using navbarMenu. Within the obesity variable section,
+# I added different tabs, like "The US," "Poverty," and "Regions" using
+# tabsetPanel. fluidRow created a nice layout for the page. I used imageOutput
+# again to display my obesity in the US map.
 
     navbarMenu("Variables in Question",
                tabPanel("Obesity",
@@ -137,7 +147,7 @@ ui <- navbarPage(
                                 br(),
                                 
                                  p("How does the percentage of the population classified as obese or overweight change over time?
-                                    The graphic to the right suggests that the percentage increases over time, looking at years from
+                                    The graphic below suggests that the percentage increases over time, looking at years from
                                     2011-2018. Where does most of the change occur?", style = "text-align: center")),
 
                                 ),
@@ -152,18 +162,21 @@ ui <- navbarPage(
                         br(),
                         br(),
                        
-                        # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted. 
-                        # I allow the user to choose which region of the graph they want to see by selectInput, which corresponds
-                        # in the server portion of Shiny later.
+                        # Using sidebarLayout allows me to create a sidebarPanel
+                        # and a mainPanel, which is the graph I wanted. I allow
+                        # the user to choose which region of the graph they want
+                        # to see by selectInput, which corresponds in the server
+                        # portion of Shiny later.
                          
                         sidebarLayout(
                             sidebarPanel(column(4),
                                          
                                 h3("Obesity Across Individual Regions", style = "color: darkred"),          
                         
-                                p("How does the percentage of the population classified as obese or overweight change over time?
-                                The graphic to the right suggests that the percentage increases over time, looking at years from
-                                2011-2018. Where does most of the change occur?"),
+                                p("How does the percentage of the population classified as obese or overweight differ across the
+                                regions of America over time? The graph to the right suggests that all regions have seen an
+                                increase in mean percentages, with relatively steep increases each year, looking at years from
+                                2011-2018. Which region has the steepest slope?"),
                                 
                                 br(),
                                 br(),
@@ -183,7 +196,9 @@ ui <- navbarPage(
                         br(),
                         br(),
                         
-                        # # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted. 
+                        # # Using sidebarLayout allows me to create a
+                        # sidebarPanel and a mainPanel, which is the graph I
+                        # wanted.
                         
                         sidebarLayout(
                           sidebarPanel(column(4),
@@ -208,9 +223,11 @@ ui <- navbarPage(
                 br(),
                 br(),
                 
-                # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted. 
-                # I allow the user to choose which region of the graph they want to see by selectInput, which corresponds
-                # in the server portion of Shiny later.
+                # Using sidebarLayout allows me to create a sidebarPanel and a
+                # mainPanel, which is the graph I wanted. I allow the user to
+                # choose which region of the graph they want to see by
+                # selectInput, which corresponds in the server portion of Shiny
+                # later.
                 
                 sidebarLayout(
                     sidebarPanel(column(3),
@@ -240,8 +257,9 @@ ui <- navbarPage(
                     )
                 ),
                 
-                      # I wanted another graph below the previous one, so I created another sidebarPanel layout below the one 
-                      # on top.
+                      # I wanted another graph below the previous one, so I
+                      # created another sidebarPanel layout below the one on
+                      # top.
                 
                        sidebarPanel(
                            
@@ -249,9 +267,10 @@ ui <- navbarPage(
                            
                            br(),
                            
-                           p("Given the map on the US's increasing obesity rates overtime (under the 'The United States' tab), I thought it would be nice to compare
-                             a map of the US's poverty rates as well. Looking at the two maps together, it is interesting to see which states
-                             have darker colors on both. Which states seem to correlate in the obesity rate map and the poverty rate map?")
+                           p("Given the map on the US's increasing obesity rates overtime (under the The United States tab), I thought 
+                           it would be interesting to create a map of the US's poverty rates as well and compare the both of them. 
+                           Looking at the two maps together, it is interesting to see which states have darker colors on both, meaning
+                           higher poverty and obesity rates. Which states have similarities in the obesity rate map and the poverty rate map?")
                            
                        ),
                        
@@ -267,9 +286,10 @@ ui <- navbarPage(
                
                 tabPanel("Food Access",
                      
-                    # I used tabsetPanel again to create tabs within the US tab. fluidRow allows me to create a nice layout 
-                    # for my page. The column function sets the text into the different grid layouts of fluidRow to help 
-                    # me organize my text.
+                    # I used tabsetPanel again to create tabs within the US tab.
+                    # fluidRow allows me to create a nice layout for my page.
+                    # The column function sets the text into the different grid
+                    # layouts of fluidRow to help me organize my text.
                              
                     tabsetPanel(
                         tabPanel("The United States",
@@ -287,12 +307,12 @@ ui <- navbarPage(
                                             
                                             br(),
                                             
-                                            p("Given the map on the US's increasing obesity rates overtime (under the 'The United States' tab), 
-                                       I thought it would be nice to compare a map that examines the US's food insecurities as well. This map
+                                            p("Given the map on the US's increasing obesity rates overtime (under the The United States tab), 
+                                       I thought it would be interesting to compare a map that examines the US's food insecurities as well. This map
                                        gives a broad overview of what food insecurity looks like in the United States.
-                                       Looking at the two maps together, it is interesting to see which states have darker colors on both. 
-                                       Which states seem to correlate in the obesity rate map and the food insecurity map?"),
-                                     
+                                       Looking at the two maps together, it is interesting to see which states have darker colors on both, meaning
+                                       higher food insecurity and obesity rates. Which states have similarities in the obesity rate map and the 
+                                       food insecurity map?"
                                  )),
                         
                              fluidRow(
@@ -315,7 +335,9 @@ ui <- navbarPage(
                                                   br(),
                                                   
                                                   p("I also wanted to look at food insecurity specifically across different states. 
-                                                    Food insecurity seems the most prominent in the Southern region."),
+                                                    Food insecurity seems the most prominent in the Southern region, and the least
+                                                    prominent in the Northeast region. This is sensible, as the South often has more
+                                                    rural areas than does the Northeast"),
                                                   
                                      ),
                                      
@@ -331,9 +353,11 @@ ui <- navbarPage(
                                  br(),
                                  br(),
                                  
-                        # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted. 
-                        # Then I used selectInput to allow the user to choose if they want to see urban or rural on the graph,
-                        # which corresponds with the server code later on. 
+                        # Using sidebarLayout allows me to create a sidebarPanel
+                        # and a mainPanel, which is the graph I wanted. Then I
+                        # used selectInput to allow the user to choose if they
+                        # want to see urban or rural on the graph, which
+                        # corresponds with the server code later on.
                             
                              sidebarLayout(
                                  sidebarPanel(column(3),
@@ -342,16 +366,20 @@ ui <- navbarPage(
                                               
                                               br(),
                                               
-                                              p("I was curious how poverty can affect food insecurity as well,
-                                              and how that may depend on the ruralness of the area you live in.
+                                              p("I was curious how poverty affects food insecurity as well,
+                                              and how that depends on the ruralness of the area you live in.
                                               It appears from the differences in the urban and rural graphs that 
-                                                being impoverished in a rural area means a stronger positive relationship with having
-                                                low food access, more so than being impoverished in an urban area."),
+                                              being impoverished in a rural area means a stronger positive relationship with having
+                                              low food access, more so than being impoverished in an urban area, though both
+                                              have positive relationships. This is logical, as having less income means a lower
+                                              ability to buy healthier foods. Furthermore, living in an urban area means a better 
+                                              public transportation system, so even if you do not own a car, there are still ways to
+                                              go to large grocery stores, whereas the same cannot be said for rural areas."),
                                               
                                               br(),
                                               
                                               p(tags$em("When choosing the different ruralness options, the graph may take quite a while to 
-                                                        load. Thanks for your patience.")),
+                                                        load. Thank you for your patience.")),
                                               
                                               br(),
                                               
@@ -372,10 +400,11 @@ ui <- navbarPage(
                         
                         )
                     
-),
+)),
     
-# I created my last tab panel (aside from the About page) using tabPanel and named it Findings. I want tabs within this 
-# tab, so I used tabsetPanel to create the tabs "Corrleation," "Variables," and "Model."
+# I created my last tab panel (aside from the About page) using tabPanel and
+# named it Findings. I want tabs within this tab, so I used tabsetPanel to
+# create the tabs "Corrleation," "Variables," and "Model."
 
     tabPanel("Findings",
              tabsetPanel(
@@ -384,7 +413,8 @@ ui <- navbarPage(
                           br(),
                           br(),
                           
-                  # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted.  
+                  # Using sidebarLayout allows me to create a sidebarPanel and a
+                  # mainPanel, which is the graph I wanted.
                   
                   sidebarLayout(
                       
@@ -394,13 +424,14 @@ ui <- navbarPage(
                                 
                                 br(),
                             
-                                p("I was curious to see whether or not having a status of low income and low food access
-                                  was related to obesity status. To have a preliminary look, I found the correlation
+                                p("I was curious to see whether or not a status of low income and low food access
+                                  was related to obesity status. For a preliminary examination, I looked at the correlation
                                   between the status of low income and low food access and obesity. However, the
                                   correlation is < 0.1, meaning the correlation is very low, as is the correlation
                                   between just the status of low food access and obesity. Thus, I decided to look at whether
                                   or not poverty plays a role in obesity. Although it is slightly higher, > 0.1, the 
-                                  correlation is still fairly low. Nevertheless, it is clear that poverty rates are 
+                                  correlation is still fairly low. It turns out, then, that food insecurity does not seem
+                                  to affect obesity rates. Nevertheless, it is clear that poverty rates are 
                                   correlated with having low income and low food access, as well as low food access.")),
                             
                         mainPanel(column(2),
@@ -414,9 +445,11 @@ ui <- navbarPage(
                         br(),
                         br(),
                         
-                        # Using sidebarLayout allows me to create a sidebarPanel and a mainPanel, which is the graph I wanted.
-                        # I wanted to create a drop down menu, and I was able to do so by using selectInput to allow the user
-                        # to choose which variables they wanted to look at.
+                        # Using sidebarLayout allows me to create a sidebarPanel
+                        # and a mainPanel, which is the graph I wanted. I wanted
+                        # to create a drop down menu, and I was able to do so by
+                        # using selectInput to allow the user to choose which
+                        # variables they wanted to look at.
                         
                         sidebarLayout(
                             
@@ -425,9 +458,12 @@ ui <- navbarPage(
                                 
                                 br(),
                                 
-                                p("Because the variables I was curious to examine turn out to be fairly unrelated, I decided to
-                              examine other variables in relation to obesity rates in the following tabs, while continuing
-                              to examine other variables that may affect the status of food insecurity."),
+                                p("Because the variables I was curious to examine turn out to be unrelated, I decided to
+                              examine other variables in relation to obesity rates while continuing
+                              to examine other variables that may affect the status of food insecurity in the graph to
+                              the right. It appears differences in age and gender see the biggest difference in mean obesity, 
+                              but not ruralness. However, differences in living location see the biggest difference in 
+                              status of food insecurity the most, whereas age and gender do not."),
                                 
                                 br(),
                                 
@@ -456,8 +492,9 @@ ui <- navbarPage(
                         br(),
                         br(),
                         
-                        # Using fluidPage gives the page a new layout. Using sidebarLayout allows me to create a \
-                        # sidebarPanel and a mainPanel, which is the graph I wanted. 
+                        # Using fluidPage gives the page a new layout. Using
+                        # sidebarLayout allows me to create a \ sidebarPanel and
+                        # a mainPanel, which is the graph I wanted.
                         
                         fluidPage(
                             sidebarLayout(
@@ -470,21 +507,22 @@ ui <- navbarPage(
                                   br(),
                                   
                                   p("In order to create a regression model, I bootstrapped my data, replicating it several times until
-                                    I got to 50,000 observations. This allowed me to increase my sample size as well as randomness to better
-                                    reflect the overall population."),
+                                    there were 50,000 observations. This allowed me to increase my sample size as well as increase 
+                                    randomness to better reflect the overall population. I then used a linear regression model to 
+                                    predict the effect of difference variables on obesity rates."),
                                   
                                   br(),
                                   
                                   h4("Outcomes", style = "color: darkred"),
                                   
-                                  p("From the regression models, as well as the correlation plot from the 'Correlation' tab, I discovered
-                                     that my two variables of interest (obesity and food insecurity) were very weakly related. Moving from
-                                     food secure (meaning not low income and low food access) to food insecure only changed the average obesity
-                                     rate by less than 1% of the population. The same goes for the definition of food secure meaning low food
-                                     access. In addition, povery rates also seem not to correlate much with obesity rates either. Instead,
-                                    obesity rates seem to be related to age and gender the most. It is difficult to determine a causal relationship
-                                    based on the following analysis, as there are many other confounding variables that could be addressed,
-                                    such as food prices for healthy foods or physical activity."),
+                                  p("From the regression models, as well as the correlation plot from the Correlation tab, I discovered
+                                  that my two variables of interest (obesity and food insecurity) were very weakly related. Moving from
+                                  food secure (meaning not low income and low food access) to food insecure only changed the average obesity
+                                  rate by less than 1% of the population. The same goes for the low food access defintion of 
+                                  food insecurity. In addition, povery rates also seem not to correlate much with obesity rates either. Instead,
+                                  obesity rates seem to be related to age and gender the most. It is difficult to determine a causal relationship
+                                  based on the following analysis, as there are many other confounding variables that could be addressed,
+                                  such as food prices for healthy foods or physical activity."),
                                   
                                   br(),
                                   
@@ -513,47 +551,70 @@ ui <- navbarPage(
                                     For example, for genderFemale, we are 95% confident that the true average percentage of obesity in a population 
                                     lies within the range of 28.1 and 28.3%.")),
                                   
-                            # My gt regression tables are saved as html files, so I needed to use includeHTML to read in the 
-                            # file into Shiny.
+                            # My gt regression tables are saved as html files,
+                            # so I needed to use includeHTML to read in the file
+                            # into Shiny.
                             
                             mainPanel(
-                                  column(7, offset = 2,
-                                         
-                                    includeHTML("plots/age_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/gender_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/race_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/region_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/urban_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/lia_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/la_gt.html"),
-                                    br(),
-                                    br(),
-                                    includeHTML("plots/poverty_gt.html"),
-                                    br(),
-                                    br()
-                                         )))
+                                tabsetPanel(
+                                    tabPanel("Age",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/age_gt.html"),
+                                             br(),
+                                             br(),
+                                        plotOutput("lm_age")),
+                                    tabPanel("Gender",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/gender_gt.html"),
+                                             br(),
+                                             br(),
+                                        plotOutput("lm_gender")),
+                                    tabPanel("Race",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/race_gt.html"),
+                                             br(),
+                                             br(),
+                                        plotOutput("lm_race")),
+                                    tabPanel("Region",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/region_gt.html"),
+                                             br(),
+                                             br(),
+                                        plotOutput("lm_region")),
+                                    tabPanel("Ruralness",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/urban_gt.html"),
+                                             br(),
+                                             br(),
+                                        plotOutput("lm_ruralness")),
+                                    tabPanel("Low Income and Low Food Access",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/lia_gt.html")),
+                                    tabPanel("Low Food Access",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/la_gt.html")),
+                                    tabPanel("Poverty",
+                                             br(),
+                                             br(),
+                                        includeHTML("plots/poverty_gt.html"))
+                                         ))))
                              
                              )
                  )
              
-             )),
+             ),
 
-    
-    # To create a drop down menu in the navigation bar, I used navbarMenu. Then I used tabPanel to label the menu options, with 
-    # the options being "The Data" and the page about me. To include hyperlinks in the text, I used certain formating like a() and 
-    # the function href -.
+    # To create a drop down menu in the navigation bar, I used navbarMenu. Then
+    # I used tabPanel to label the menu options, with the options being "The
+    # Data" and the page about me. To include hyperlinks in the text, I used
+    # certain formating like a() and the function href =.
     
     navbarMenu("About",
                tabPanel("The Data",
@@ -600,7 +661,7 @@ ui <- navbarPage(
                         
                ),
                
-               # Using tags$em allowed me to make the text italicized. 
+               # Using tags$em allowed me to make the text italicized.
                
                tabPanel("Me :)",
                         
@@ -633,9 +694,10 @@ ui <- navbarPage(
 
 server <- function(input, output) {
     
-    # Load in image for top of app for Introductio page. I decide the height and width of the image, and set deleteFile = FALSE
-    # so my image wouldn't get deleted from my files once the app runs. I set it equal to TRUE by mistake once and it was 
-    # a hassle. renderImage allows you to render image files.
+    # Load in image for top of app for Introductio page. I decide the height and
+    # width of the image, and set deleteFile = FALSE so my image wouldn't get
+    # deleted from my files once the app runs. I set it equal to TRUE by mistake
+    # once and it was a hassle. renderImage allows you to render image files.
     
     output$obesity_image <- renderImage({
         list(src = './images/obesity.image.jpg', 
@@ -652,9 +714,11 @@ server <- function(input, output) {
              style = "display: block; margin-left: auto; margin-right: auto;")}, 
         deleteFile = FALSE)
     
-    # Now I needed to render some plots. I did this using renderPlot. It is basically the same code as in an RMD file. The
-    # only thing I had to do was set the data argument for ggplot instead of piping data like usual. The name after output$ is
-    # what you should call in the ui portion of Shiny to get the same grah or image.
+    # Now I needed to render some plots. I did this using renderPlot. It is
+    # basically the same code as in an RMD file. The only thing I had to do was
+    # set the data argument for ggplot instead of piping data like usual. The
+    # name after output$ is what you should call in the ui portion of Shiny to
+    # get the same grah or image.
     
     output$obesity_region <- renderPlot({
         obesity_region <- obesity_region %>% 
@@ -673,10 +737,11 @@ server <- function(input, output) {
                   panel.grid.minor = element_blank())
     })
     
-    # Next I needed to output a bunch of different plots and images, so I used renderImage 
-    # and also renderPlot. Set filter(urban == input$urban) allows the user from the ui portion
-    # of Shiny to choose the factor level to filter my data by, which is why input$urban works.
-    # I then graphed the data and set a best fit line.
+    # Next I needed to output a bunch of different plots and images, so I used
+    # renderImage and also renderPlot. Set filter(urban == input$urban) allows
+    # the user from the ui portion of Shiny to choose the factor level to filter
+    # my data by, which is why input$urban works. I then graphed the data and
+    # set a best fit line.
     
     output$obesity_region_facet <- renderImage({
         list(src = './plots/obesity_region_plot.png', 
@@ -701,8 +766,9 @@ server <- function(input, output) {
             geom_smooth(method = "lm", color = "blue")
     })
     
-    # I used renderPlot and renderImage to render a couple graphs. I plotted poverty on a US map, and then low income and low
-    # food access on the US map.
+    # I used renderPlot and renderImage to render a couple graphs. I plotted
+    # poverty on a US map, and then low income and low food access on the US
+    # map.
     
     output$poverty_plot <- renderPlot({
         plot_usmap(data = food_poverty_mean, values = "mean_poverty", 
@@ -722,7 +788,7 @@ server <- function(input, output) {
              style = "display: block; margin-left: auto; margin-right: auto;")
     }, deleteFile = FALSE)
     
-    # I then made the bar plot for the low income and low food access variable. 
+    # I then made the bar plot for the low income and low food access variable.
     
     output$lia_states <- renderPlot({
         food_lia <- food_lia %>% 
@@ -749,8 +815,9 @@ server <- function(input, output) {
     width = 940,
     height = 750)
     
-    # I created a graph where you can choose the amount of ruralness using input$urban. I used geom_jitter
-    # because some points overlapped with each other.
+    # I created a graph where you can choose the amount of ruralness using
+    # input$urban. I used geom_jitter because some points overlapped with each
+    # other.
     
     output$poverty_lia_plot <- renderPlot({
         bootstrap_joined <- bootstrap_joined %>% 
@@ -785,12 +852,15 @@ server <- function(input, output) {
     width = 500,
     height = 500)
     
-    # I want to create a plot where you can choose the yvariable and demographic (xvariable) to look, so I used both
-    # input$demographic and input$yvariable. However, when I use the inputs, the graph doesn't factor the categorical
-    # variables, even though I specifically mutated the variables to be factors. It works when there is no input, 
-    # and the x and y are just a single variable. I still need to work on this part. Using ifelse  and paste allows me 
-    # to print labels that are based on the user input. I commented out the code that I want to use eventually, but will 
-    # use the following for now.
+    # I want to create a plot where you can choose the yvariable and demographic
+    # (xvariable) to look, so I used both input$demographic and input$yvariable.
+    # However, when I use the inputs, the graph doesn't factor the categorical
+    # variables, even though I specifically mutated the variables to be factors.
+    # I realized this is because, if I just use aes(x =, y =), R will read
+    # whatever I set x and y equal to as a single vector with one observation.
+    # Thus, I need to use aes_string to factor the categorical variables and
+    # make them reactive. Using ifelse and paste allows me to print labels that
+    # are based on the user input.
     
     output$demographic <- renderPlot({
         bootstrap_joined <- bootstrap_joined %>%
@@ -798,7 +868,7 @@ server <- function(input, output) {
                gender = as.factor(gender),
                race = as.factor(race),
                urban = as.factor(urban)) %>% 
-        filter(!is.na(input$demographic))
+            drop_na(input$demographic)
 
         new_xaxis_label <- if(input$demographic == "age"){
             print("Age")
@@ -806,7 +876,7 @@ server <- function(input, output) {
             print("Gender")
         } else if(input$demographic == "race"){
             print("Race")
-        } else if(input$demographics == "urban"){
+        } else if(input$demographic == "urban"){
             print("Ruralness")
         }
 
@@ -824,62 +894,198 @@ server <- function(input, output) {
             print("Gender")
         } else if(input$demographic == "race"){
             print("Race")
-        } else if(input$demographics == "urban"){
+        } else if(input$demographic == "urban"){
             print("Ruralness")
         }
-
-        # ggplot(data = bootstrap_joined, aes(x = input$demographic, y = mean_perc_obese, color = input$demographic)) +
-        #     geom_jitter() +
-        #     theme_minimal() +
-        #     theme(panel.grid.minor.y = element_blank(),
-        #           panel.grid.minor.x = element_blank(),
-        #           axis.text.x = element_text(angle = 35, hjust = 1)) +
-        #     labs(title = paste("Relationship Between ", input$demographic, " and ", input$yvariable, "", sep = ""),
-        #          caption = "Data from US Department of Agriculture and 2010 Census Bureau",
-        #          color = new_legend_label,
-        #     x = new_xaxis_label,
-        #     y = new_yaxis_label)
         
-        ggplot(data = bootstrap_joined, aes(x = age, y = mean_perc_obese, color = age)) +
+        ggplot(data = bootstrap_joined, aes_string(x = input$demographic,
+                                                   y = input$yvariable,
+                                                   color = input$demographic)) +
             geom_jitter() +
             theme_minimal() +
             theme(panel.grid.minor.y = element_blank(),
                   panel.grid.minor.x = element_blank(),
-                  axis.text.x = element_text(angle = 35, hjust = 1)) +
+                  axis.text.x = element_text(angle = 15, hjust = 1)) +
             labs(title = paste("Relationship Between ", new_xaxis_label, " and ", new_yaxis_label, "", sep = ""),
                  caption = "Data from US Department of Agriculture and 2010 Census Bureau",
                  color = new_legend_label,
                  x = new_xaxis_label,
                  y = new_yaxis_label)
         
+        
     })
     
-    # This plot output are just test plots for when I want to format something and don't want to render such a large plot.
+    # To better visualize the regression than just through gt tables, 
+    # I made a plot to show the predictions. Since each estimate is 
+    # an offset from the baseline variable, I added the baseline 
+    # estimate to each of the other levels in the variable. 
     
-    output$test <- renderPlot({
-            ggplot(data = bootstrap_joined, aes(x = input$demographic, y = mean_perc_obese, color = input$demographic)) +
-            geom_jitter() +
+    output$lm_age <- renderPlot({
+            lm_age <- lm(mean_perc_obese ~ age, data = bootstrap_joined) %>% 
+                tidy()
+            
+            baseline <- lm_age %>% 
+                filter(term == "(Intercept)") %>% 
+                select(estimate) %>% 
+                pull() %>% 
+                round(digits = 2)
+            
+            lm_age2 <- lm_age %>% 
+            mutate("Estimate" = case_when(
+                term == "(Intercept)" ~ estimate,
+                term != "(Intercept)" ~ estimate + baseline
+            ))
+            
+            lm_age2[1, "term"] <- "age18-24"
+            lm_age2$term <- str_sub(lm_age2$term, 4)
+        
+            ggplot(data = lm_age2, aes(x = term, y = Estimate, color = term)) +
+            geom_point(aes(size = 20), show.legend = FALSE) +
             theme_minimal() +
-            theme(panel.grid.minor.y = element_blank(),
-                  panel.grid.minor.x = element_blank(),
-                  axis.text.x = element_text(angle = 35, hjust = 1)) +
-            labs(title = "Poverty Rate on Obesity Rate",
-                 caption = "Data from US Department of Agriculture and 2010 Census Bureau",
-                 color = "Ruralness",
-                 x = "Mean Poverty Rate",
+            theme(axis.text.x = element_text(size = 12),
+                  axis.text.y = element_text(size = 12),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14)) +    
+            labs(title = "Predicted Mean Percentage of Population Classified as Obese Based on Age",
+                 caption = "Data from USDA, 2010 Census Bureau, and CDC",
+                 x = "Age",
                  y = "Mean Obesity Rate")
     })
+    
+    output$lm_gender <- renderPlot({
+        lm_gender <- lm(mean_perc_obese ~ gender, data = bootstrap_joined) %>% 
+            tidy()
+
+        baseline <- lm_gender %>%
+            filter(term == "(Intercept)") %>%
+            select(estimate) %>%
+            pull() %>%
+            round(digits = 2)
+
+        lm_gender2 <- lm_gender %>%
+            mutate("Estimate" = case_when(
+                term == "(Intercept)" ~ estimate,
+                term != "(Intercept)" ~ estimate + baseline
+            ))
+
+        lm_gender2[1, "term"] <- "genderFemale"
+        lm_gender2$term <- str_sub(lm_gender2$term, 7)
+
+        ggplot(data = lm_gender2, aes(x = term, y = Estimate, color = term)) +
+            geom_point(aes(size = 20), show.legend = FALSE) +
+            theme_minimal() +
+            theme(axis.text.x = element_text(size = 12),
+                  axis.text.y = element_text(size = 12),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14)) +
+            labs(title = "Predicted Mean Percentage of Population Classified as Obese Based on Gender",
+                 caption = "Data from USDA, 2010 Census Bureau, and CDC",
+                 x = "Gender",
+                 y = "Mean Obesity Rate")
+    })
+    
+    output$lm_race <- renderPlot({
+        lm_race <- lm(mean_perc_obese ~ race, data = bootstrap_joined) %>% 
+            tidy()
+        
+        baseline <- lm_race %>%
+            filter(term == "(Intercept)") %>%
+            select(estimate) %>%
+            pull() %>%
+            round(digits = 2)
+        
+        lm_race2 <- lm_race %>%
+            mutate("Estimate" = case_when(
+                term == "(Intercept)" ~ estimate,
+                term != "(Intercept)" ~ estimate + baseline
+            ))
+        
+        lm_race2[1, "term"] <- "    2 or more races"
+        lm_race2$term <- str_sub(lm_race2$term, 5)
+        
+        ggplot(data = lm_race2, aes(x = term, y = Estimate, color = term)) +
+            geom_point(aes(size = 20), show.legend = FALSE) +
+            theme_minimal() +
+            theme(axis.text.x = element_text(size = 12, angle = 12),
+                  axis.text.y = element_text(size = 12),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14)) +
+            labs(title = "Predicted Mean Percentage of Population Classified as Obese Based on Race",
+                 caption = "Data from USDA, 2010 Census Bureau, and CDC",
+                 x = "Race",
+                 y = "Mean Obesity Rate")
+    })
+    
+    output$lm_region <- renderPlot({
+        lm_region <- lm(mean_perc_obese ~ region, data = bootstrap_joined) %>% 
+            tidy()
+        
+        baseline <- lm_region %>%
+            filter(term == "(Intercept)") %>%
+            select(estimate) %>%
+            pull() %>%
+            round(digits = 2)
+        
+        lm_region2 <- lm_region %>%
+            mutate("Estimate" = case_when(
+                term == "(Intercept)" ~ estimate,
+                term != "(Intercept)" ~ estimate + baseline
+            ))
+        
+        lm_region2[1, "term"] <- "regionMidwest"
+        lm_region2$term <- str_sub(lm_region2$term, 7)
+        
+        ggplot(data = lm_region2, aes(x = term, y = Estimate, color = term)) +
+            geom_point(aes(size = 20), show.legend = FALSE) +
+            theme_minimal() +
+            theme(axis.text.x = element_text(size = 12),
+                  axis.text.y = element_text(size = 12),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14)) +
+            labs(title = "Predicted Mean Percentage of Population Classified as Obese Based on Region",
+                 caption = "Data from USDA, 2010 Census Bureau, and CDC",
+                 x = "Region",
+                 y = "Mean Obesity Rate")
+    })
+    
+    output$lm_ruralness <- renderPlot({
+        lm_urban <- lm(mean_perc_obese ~ urban, data = bootstrap_joined) %>% 
+            tidy()
+        
+        baseline <- lm_urban %>%
+            filter(term == "(Intercept)") %>%
+            select(estimate) %>%
+            pull() %>%
+            round(digits = 2)
+        
+        lm_urban2 <- lm_urban %>%
+            mutate("Estimate" = case_when(
+                term == "(Intercept)" ~ estimate,
+                term != "(Intercept)" ~ estimate + baseline
+            ))
+        
+        lm_urban2[1, "term"] <- "urbanRural"
+        lm_urban2[2, "term"] <- "urbanUrban"
+        lm_urban2$term <- str_sub(lm_urban2$term, 6)
+        
+        ggplot(data = lm_urban2, aes(x = term, y = Estimate, color = term)) +
+            geom_point(aes(size = 20), show.legend = FALSE) +
+            theme_minimal() +
+            theme(axis.text.x = element_text(size = 12),
+                  axis.text.y = element_text(size = 12),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14)) +
+            labs(title = "Predicted Mean Percentage of Population Classified as Obese Based on Ruralness",
+                 caption = "Data from USDA, 2010 Census Bureau, and CDC",
+                 x = "Ruralness",
+                 y = "Mean Obesity Rate")
+    })
+}
 
 # Run the application 
 shinyApp(ui = ui, server = server)
 
-
-# Questions
-# Ask about ask about factor graph (yvariable, demographic, filter out NAs), ask about regression, why poverty for urban/rural in 
-# food access takes forever to load the graph. 
-
-# To Do
-# Could make predictor graphic based on your demographic like Steph's project. Could add little icons in the 
-# navbar tab using icon.
+# To Do Could make predictor graphic based on your demographic like Steph's
+# project. Could add little icons in the navbar tab using icon.
 
 
