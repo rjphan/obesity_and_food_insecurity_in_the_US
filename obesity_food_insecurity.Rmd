@@ -82,7 +82,9 @@ obesity <- obesity_x %>%
 # I then saved it to an RDS file to load in Shiny later. Now I want to make a
 # plot that shows the mean percentage of obesity over time on the US map, so I
 # used plot_usmap and then gganimate. scale_fill_continuous lets me choose the
-# legend colours I want. Then I saved it as a file using anim_save.
+# legend colours I want. Then I saved it as a file using anim_save. Although
+# there is an error that says I do not specify an animation object to save,
+# I used plot = last_animation(), which does indicate the animation object.
 
 obesity_mean <- obesity %>% 
     group_by(state, year) %>% 
