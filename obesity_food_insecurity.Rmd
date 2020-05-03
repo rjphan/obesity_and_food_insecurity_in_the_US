@@ -82,16 +82,14 @@ obesity <- obesity_x %>%
 # I then saved it to an RDS file to load in Shiny later. Now I want to make a
 # plot that shows the mean percentage of obesity over time on the US map, so I
 # used plot_usmap and then gganimate. scale_fill_continuous lets me choose the
-# legend colours I want. Then I saved it as a file using anim_save. Although
-# there is an error that says I do not specify an animation object to save,
-# I used plot = last_animation(), which does indicate the animation object.
+# legend colours I want. Then I saved it as a file using anim_save. 
 
 obesity_mean <- obesity %>% 
     group_by(state, year) %>% 
     summarise(mean_perc = mean(perc_obese)) %>% 
     filter(state != "US")
 
-saveRDS(obesity_mean, file = "obesity_mean.RDS")
+saveRDS(obesity_mean, file = "shiny/data/obesity_mean.RDS")
 
 obesity_mean_plot <- plot_usmap(data = obesity_mean, values = "mean_perc", color = "red", labels = FALSE) +
     theme(legend.position = "right",
@@ -106,7 +104,7 @@ obesity_mean_plot <- plot_usmap(data = obesity_mean, values = "mean_perc", color
 
 animate(obesity_mean_plot)
 
-anim_save("obesity_shiny/plots/obesity_mean_usmap.gif", plot = last_animation())
+anim_save("shiny/plots/obesity_mean_usmap.gif", plot = last_animation())
 
 ```
 
@@ -130,7 +128,7 @@ obesity_region <- obesity_mean %>%
     mutate(year = as.numeric(year)) %>% 
   mutate(mean_perc = round(mean_perc, digits = 0))
 
-saveRDS(obesity_region, file = "./obesity_shiny/data/obesity_region.RDS")
+saveRDS(obesity_region, file = "shiny/data/obesity_region.RDS")
 
 obesity_region_plot <- obesity_region %>% 
     filter(!is.na(region)) %>%
@@ -147,7 +145,7 @@ obesity_region_plot <- obesity_region %>%
     geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
     facet_wrap(~ region)
     
-ggsave("obesity_shiny/plots/obesity_region_plot.png", plot = last_plot())
+ggsave("shiny/plots/obesity_region_plot.png", plot = last_plot())
 
 ```
 
@@ -193,7 +191,7 @@ food_access <- food_access_y %>%
     ) %>% 
     select(-county) 
 
-saveRDS(food_access, file = "./obesity_shiny/data/food_access.RDS")
+saveRDS(food_access, file = "shiny/data/food_access.RDS")
 
 ```
 
@@ -210,7 +208,7 @@ food_poverty_mean <- food_access %>%
     group_by(state) %>% 
     summarise(mean_poverty = mean(poverty))
 
-saveRDS(food_poverty_mean, file = "./obesity_shiny/data/food_poverty_mean.RDS")
+saveRDS(food_poverty_mean, file = "shiny/data/food_poverty_mean.RDS")
 
 food_poverty_mean_plot <- plot_usmap(data = food_poverty_mean, values = "mean_poverty", 
                                      color = "white", labels = FALSE) +
@@ -221,7 +219,7 @@ food_poverty_mean_plot <- plot_usmap(data = food_poverty_mean, values = "mean_po
          caption = "Data from US Department of Agriculture and 2010 Census Bureau") +
     theme_void()
 
-ggsave("obesity_shiny/plots/food_poverty_plot.png", plot = last_plot())
+ggsave("shiny/plots/food_poverty_plot.png", plot = last_plot())
 
 ```
 
@@ -249,7 +247,7 @@ food_lia <- food_access %>%
     mutate(perc = round(as.numeric(perc), digits = 0)) %>% 
     arrange(perc)
 
-saveRDS(food_lia, file = "./obesity_shiny/data/food_lia.RDS")
+saveRDS(food_lia, file = "shiny/data/food_lia.RDS")
 
 food_lia_plot <- food_lia %>% 
     group_by(region) %>% 
@@ -270,7 +268,7 @@ food_lia_plot <- food_lia %>%
          fill = "Region") +
     geom_text(aes(label = perc), hjust = -0.3, size = 2)
 
-ggsave("obesity_shiny/plots/food_lia_plot.png", plot = last_plot())
+ggsave("shiny/plots/food_lia_plot.png", plot = last_plot())
 
 ```
 
@@ -324,7 +322,7 @@ food_sum <- food_access %>%
     summarise(mean_poverty = round(mean(poverty), digits = 0)) %>% 
     filter(!is.na(state))
 
-saveRDS(food_sum, file = "./obesity_shiny/data/food_sum.RDS")
+saveRDS(food_sum, file = "shiny/data/food_sum.RDS")
 
 joined <- left_join(obesity_2011, food_sum, by = "state") %>% 
     mutate(region = case_when(
@@ -360,7 +358,7 @@ joined <- joined %>%
            urban = as.factor(urban),
            region = as.factor(region))
 
-saveRDS(joined, file = "./obesity_shiny/data/joined.RDS")
+saveRDS(joined, file = "shiny/data/joined.RDS")
 
 joined_cor <- joined %>% 
     mutate("Obesity Rate" = mean_perc_obese,
@@ -370,7 +368,7 @@ joined_cor <- joined %>%
     select("Obesity Rate", "% Low Income and Food Access", "% Low Food Access", "Poverty Rate") %>% 
     cor() 
 
-saveRDS(joined_cor, file = "./obesity_shiny/data/joined_cor.RDS")
+saveRDS(joined_cor, file = "shiny/data/joined_cor.RDS")
 
 corrplot <- ggcorrplot(joined_cor, 
              type = "upper", 
@@ -383,7 +381,7 @@ corrplot <- ggcorrplot(joined_cor,
              theme(plot.title = element_text(hjust = 0.5, size = 15),
                    legend.position = "none")
 
-ggsave("obesity_shiny/plots/corr_plot.png", plot = corrplot)
+ggsave("shiny/plots/corr_plot.png", plot = corrplot)
 
 ```
 
@@ -408,7 +406,7 @@ bootstrap_joined <- joined %>%
   rep_sample_n(size = 50, replace = TRUE, reps = 1000) %>% 
   group_by(replicate)
 
-saveRDS(bootstrap_joined, file = "./obesity_shiny/data/bootstrap_joined.RDS")
+saveRDS(bootstrap_joined, file = "shiny/data/bootstrap_joined.RDS")
 
 joined_lm_lia <- lm(mean_perc_obese ~ perc_lia, data = bootstrap_joined) %>% 
   tidy(conf.int = TRUE) %>%
@@ -621,7 +619,7 @@ joined_poverty_obesity <- bootstrap_joined %>%
        y = "Mean Obesity Rate") +
   geom_smooth(method = "lm", color = "black")
 
-ggsave("obesity_shiny/plots/poverty_obesity_plot.png", plot = last_plot())
+ggsave("shiny/plots/poverty_obesity_plot.png", plot = last_plot())
 
 joined_demo <- bootstrap_joined %>% 
   ggplot(aes(x = age, y = mean_perc_obese, color = age)) +
@@ -651,7 +649,7 @@ lia_usmap <- plot_usmap(data = food_sum, values = "perc_lia", color = "dark gree
          caption = "Data from USDA and 2010 Census Bureau") +
     theme_void()
 
-ggsave("obesity_shiny/plots/lia_usmap.png", plot = last_plot())
+ggsave("shiny/plots/lia_usmap.png", plot = last_plot())
 
 ```
 
@@ -672,7 +670,7 @@ poverty_lia_chart <- bootstrap_joined %>%
             y = "Percent of Population Classified as \n Having Low Income and Low Food Access") +
        geom_smooth(method = "lm", color = "green")
 
-ggsave("obesity_shiny/plots/poverty_lia_chart.png", plot = last_plot())
+ggsave("shiny/plots/poverty_lia_chart.png", plot = last_plot())
 
 ```
 
