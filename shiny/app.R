@@ -1174,8 +1174,3 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-
-# To Do Could make predictor graphic based on your demographic like Steph's
-# project. Could add little icons in the navbar tab using icon.
-
-
